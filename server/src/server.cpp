@@ -62,23 +62,24 @@ void Server::run(int port)
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = htons(INADDR_ANY);
     server_socket = Socket();
-	Bind();
-	Listen();
-	int connected_count = 0;
-	int max_connect = 5;
+    Bind();
+    Listen();
+    int connected_count = 0;
+    int max_connect = 5;
     while (true) {
-		if (connected_count < max_connect) {
-			std::cout << "Wait Connect\n";
-			int client =  Accept();
-			connected_count++;
-        	std::thread th1([&](){NewConnection(client, connected_count);});
-        	th1.detach();
-		}
-		if (connected_count == max_connect) {
-			int client =  Accept();
-			Notify(client);
-		}
+	if (connected_count < max_connect) {
+	    std::cout << "Wait Connect\n";
+	    int client =  Accept();
+	    std::cout << "Connected\n";
+	    connected_count++;
+            std::thread th1([&](){NewConnection(client, connected_count);});
+            th1.detach();
 	}
+	if (connected_count == max_connect) {
+	    int client =  Accept();
+	    Notify(client);
+	}
+    }
 }
 
 void Server::NewConnection(int client, int& connected_count)

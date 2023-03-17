@@ -1,10 +1,13 @@
-SRC=./src/
 
-run: client
-	./client 127.0.0.1 1234
+SERVER=./server/src/
+CLIENT=./client/src/
+all:  server client
 
-client: ${SRC}main.cpp ${SRC}client.cpp ${SRC}client.hpp
-	g++ ${SRC}main.cpp ${SRC}client.cpp -o client -lpthread
+server: ${SERVER}main.cpp ${SERVER}client.cpp ${SERVER}client.hpp
+	g++ ${SERVER}main.cpp ${SERVER}server.cpp -o server -lpthread
+client: ${CLIENT}main.cpp ${CLIENT}client.cpp ${CLIENT}client.hpp
+	g++ ${CLIENT}main.cpp ${CLIENT}client.cpp -o client -lpthread
 
 clean:
 	rm -f client
+	rm -f server

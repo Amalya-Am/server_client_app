@@ -1,9 +1,9 @@
-Welcome to my Server-Client application
+Welcome to  Server-Client application
 
-Run Server: make from /server/ directory.  
-Run Client: make from /client/ directory.  
+Build: make 
+Run Server: ./server1 1234
+Run Client: ./client1 127.0.0.1 1234 
 
-Introduction:
 
 Server: 
 		Receive shell commands and execute them.
